@@ -33,8 +33,6 @@ body {
 
 .video {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
   z-index: -100;
   background-size: cover;
   transition: 1s opacity;
@@ -127,7 +125,6 @@ body {
   color: white;
   overflow: hidden;
   transition: height 0.5s ease-out;
-/* transition: height 0.5s cubic-bezier(0.39, 0.58, 0.57, 1); */
   z-index: 1000;
 }
 
@@ -149,8 +146,8 @@ body {
   justify-content: center;
   cursor: pointer;
   z-index: 1001;  /* Make sure the button stays on top */
+  /* transition: transform 0.5s cubic-bezier(0.39, 0.58, 0.57, 1); */
   transition: transform 0.5s ease-out;
-/*   transition: transform 0.5s cubic-bezier(0.39, 0.58, 0.57, 1); */
 }
 
 .move-up {
