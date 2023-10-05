@@ -1,0 +1,42 @@
+@font-face {
+	font-family: 'ABC-Whyte';
+	src: url('fonts/ABCWhyteInktrapVariable-Trial.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'ABC-Whyte-Thin';
+	src: url('fonts/ABCWhyte-Thin-Trial.otf') format('opentype');
+}
+@font-face {
+	font-family: 'ABC-Whyte-Reg';
+	src: url('fonts/ABCWhyte-Regular-Trial.otf') format('opentype');
+}
+@font-face {
+	font-family: 'ABC-Whyte-Light';
+	src: url('fonts/ABCWhyte-Light-Trial.otf') format('opentype');
+}
+@font-face {
+	font-family: 'ABC-Whyte-Mid';
+	src: url('fonts/ABCWhyte-Medium-Trial.otf') format('opentype');
+}
+@font-face {
+	font-family: 'ABC-Whyte-Book';
+	src: url('fonts/ABCWhyte-Book-Trial.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'ABCWhyte-Bold';
+	src: url('fonts/ABCWhyte-Black-Bold.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'ABCWhyte-Black';
+	src: url('fonts/ABCWhyte-Black-Trial.otf') format('opentype');
+}
+@font-face {
+	font-family: 'GT-America-md';
+	src: url('fonts/GT-America-Mono-Medium-Trial.otf') format('opentype');
+}
+
+
+
+
