@@ -5,14 +5,23 @@
     align-items: center; /* 水平居中对齐子元素 */
     justify-content: center; /* 垂直居中对齐子元素 */
     height: 100vh; /* 调整视口高度，根据需要修改 */
+ 
   }
-   
+
+  .slider-forMouseCheck {
+    width: 1000px;
+    height: 700px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+  
+  
  .slider {
     width: 800px;
-    height: 750px;
+    height: 700px;
     overflow: hidden;
     position: relative;
-    
   }
   
   .slides {
