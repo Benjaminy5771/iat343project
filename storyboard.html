@@ -6,6 +6,7 @@
   <link href="css/fonts.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
   <link href="css/subPage.css" rel="stylesheet">
+  <link href="css/storyboardPage.css" rel="stylesheet">
 </head>
 <body>
 
@@ -23,6 +24,38 @@
     </ul>
   </div>
 
+  
+
+
+  <div class="slider-box">
+    <div class="slider">
+      <div class="slides">
+        <!-- Video slide -->
+        <div class="slide video-slide">
+          <div class="video-container">
+            <video width="800" autoplay muted loop>
+              <source src="videos/videoWithNarration.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+  
+        <!-- Image slides -->
+        <div class="slide"><img src="images/st1.jpeg" alt="Image 1"></div>
+        <div class="slide"><img src="images/st2.jpeg" alt="Image 2"></div>
+        <div class="slide"><img src="images/st3.jpeg" alt="Image 3"></div>
+        <div class="slide"><img src="images/st4.jpeg" alt="Image 4"></div>
+      </div>
+    </div>
+    <div class="dots">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+      <span class="dot" onclick="currentSlide(5)"></span> 
+    </div>
+  </div>
+
   <div class="footer-container">
   
   </div>
@@ -31,5 +64,173 @@
        displayTextAtLeft('Storyboard');
   </script>
 
+<script>
+
+var currentCursor = '';
+
+// 当前展示的幻灯片索引
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// 为每个点添加点击事件，跳转到相应的幻灯片
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+// 展示指定的幻灯片
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("slide");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+
+  // 计算并应用transform属性
+  var offset = -800 * (slideIndex - 1); // 假设每张幻灯片宽度为1000px
+  document.querySelector('.slides').style.transform = `translateX(${offset}px)`;
+
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  dots[slideIndex-1].className += " active";
+}
+
+
+// 创建一个用于生成箭头图标的函数
+function createArrowIcon(direction) {
+  var canvas = document.createElement('canvas');
+  canvas.width = 100;  // 将画布大小设置为100px x 100px
+  canvas.height = 100;
+  var ctx = canvas.getContext('2d');
+  
+  ctx.strokeStyle = 'black';
+  ctx.lineWidth = 15;  // 加粗线条以适应更大的尺寸
+  ctx.beginPath();
+  if (direction === 'right') {
+    ctx.moveTo(30, 20);  // 调整箭头坐标以适应更大的尺寸
+    ctx.lineTo(70, 50);
+    ctx.lineTo(30, 80);
+  } else {
+    ctx.moveTo(70, 20);
+    ctx.lineTo(30, 50);
+    ctx.lineTo(70, 80);
+  }
+  ctx.stroke();
+  return canvas.toDataURL();
+
+  
+}
+// 鼠标样式
+var rightArrowIcon = createArrowIcon('right');
+var leftArrowIcon = createArrowIcon('left');
+
+// 添加鼠标箭头变化的逻辑
+document.querySelector('.slider').addEventListener('mousemove', function(e) {
+  var x = e.clientX - this.getBoundingClientRect().left; // 获取鼠标相对于滑块左边的位置
+  var width = this.offsetWidth;
+  var thirdWidth = width / 3;
+
+  if (x > 2 * thirdWidth) {
+    // 鼠标在右1/3部分
+    this.style.cursor = `url(${rightArrowIcon}), auto`;
+    currentCursor = 'arrow';
+  } else if (x < thirdWidth) {
+    // 鼠标在左1/3部分
+    this.style.cursor = `url(${leftArrowIcon}), auto`;
+    currentCursor = 'arrow';
+  } else {
+    // 鼠标在中间1/3部分
+    this.style.cursor = `url(${viewCursor}), auto`;
+    currentCursor = 'view';
+  }
+});
+
+
+function createViewCursor() {
+  var canvas = document.createElement('canvas');
+  canvas.width = 100;  // 将画布大小设置为100px x 50px
+  canvas.height = 50;
+  var ctx = canvas.getContext('2d');
+  
+  // 绘制圆角矩形
+  ctx.fillStyle = 'black';
+  var cornerRadius = 25;
+  ctx.beginPath();
+  ctx.moveTo(cornerRadius, 0);
+  ctx.lineTo(100 - cornerRadius, 0);
+  ctx.arcTo(100, 0, 100, cornerRadius, cornerRadius);
+  ctx.lineTo(100, 50 - cornerRadius);
+  ctx.arcTo(100, 50, 100 - cornerRadius, 50, cornerRadius);
+  ctx.lineTo(cornerRadius, 50);
+  ctx.arcTo(0, 50, 0, 50 - cornerRadius, cornerRadius);
+  ctx.lineTo(0, cornerRadius);
+  ctx.arcTo(0, 0, cornerRadius, 0, cornerRadius);
+  ctx.closePath();
+  ctx.fill();
+  
+  // 绘制文字
+  ctx.font = '20px Arial';
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('view', 50, 25);
+
+  return canvas.toDataURL();
+}
+
+var viewCursor = createViewCursor();
+
+function createBackCursor() {
+  var canvas = document.createElement('canvas');
+  canvas.width = 100;  // 将画布大小设置为100px x 50px
+  canvas.height = 50;
+  var ctx = canvas.getContext('2d');
+  
+  // 绘制圆角矩形
+  ctx.fillStyle = 'black';
+  var cornerRadius = 25;
+  ctx.beginPath();
+  ctx.moveTo(cornerRadius, 0);
+  ctx.lineTo(100 - cornerRadius, 0);
+  ctx.arcTo(100, 0, 100, cornerRadius, cornerRadius);
+  ctx.lineTo(100, 50 - cornerRadius);
+  ctx.arcTo(100, 50, 100 - cornerRadius, 50, cornerRadius);
+  ctx.lineTo(cornerRadius, 50);
+  ctx.arcTo(0, 50, 0, 50 - cornerRadius, cornerRadius);
+  ctx.lineTo(0, cornerRadius);
+  ctx.arcTo(0, 0, cornerRadius, 0, cornerRadius);
+  ctx.closePath();
+  ctx.fill();
+  
+  // 绘制文字
+  ctx.font = '20px Arial';
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('back', 50, 25);
+
+  return canvas.toDataURL();
+}
+
+var backCursor = createBackCursor();
+
+
+
+// 为滑块添加点击事件来滚动幻灯片
+document.querySelector('.slider').addEventListener('click', function(e) {
+  var x = e.clientX - this.getBoundingClientRect().left;
+  var width = this.offsetWidth;
+  if (x > width / 2) {
+    // 点击右半部分，向右滚动
+    currentSlide(slideIndex + 1);
+  } else {
+    // 点击左半部分，向左滚动
+    currentSlide(slideIndex - 1);
+  }
+});
+
+
+
+</script>
 </body>
 </html>
