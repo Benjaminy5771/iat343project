@@ -47,6 +47,11 @@ body {
   background: rgba(255, 255, 255, 0.7); /* 白色遮照，透明度80% */
 }
 
+.video video {
+  width: 100vw;
+  height: auto;
+}
+
 /* title and sub title */
 .title-container{
   display: flex;       
@@ -166,13 +171,13 @@ table {
 }
 
 td {
-  padding: 0px 50px; /* 增加左右内边距 */
+  padding: 0px 50px; 
 }
 
 td:empty {
   padding: 0;
   border: none;
-  width: 50px; /* 根据需要调整空白列的宽度 */
+  width: 50px;
 }
 
 
